@@ -1,0 +1,18 @@
+Package: FarsPackageCoursera
+Title: FARS Analysis
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Patrick",
+           family = "Raedler",
+           role = c("aut", "cre"),
+           email = "pat-jump@web.de")
+Description: The functions in this package will enable the user to read, summarize, and visualize Fatalaty Analysis Recording System (FARS) data.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Imports: dplyr, graphics, maps, readr, tidyr

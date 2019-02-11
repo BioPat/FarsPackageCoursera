@@ -1,0 +1,85 @@
+---
+title: "FARS Data Analysis"
+author: "Raedler, Patrick"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FARS Data Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Reading, Summarizing and Visualizing FARS Data
+
+## Description
+
+The functions in this package will enable the user to read, summarize, and visualize Fatalaty Analysis Recording System (FARS)
+data. FARS data will need to be stored in the workin directory in the "accident_year.csv.bz2" format, where "year" will be a 
+specific year for which data was recorded.  
+
+## Usage
+
+-- make_filename(year)  
+-- fars_read(filename)  
+-- fars_read_years(years)  
+-- fars_summarize_years(years)  
+-- fars_map_state(state.num, year)  
+
+## Arguments 
+
+filename    Name of the FARS file stored in the working directory  
+state.num   The number of a state that is to be mapped (From 1 to 51)  
+year        Year for which the FARS data wants to be assesed (e.g 2013)
+years       One or multiple years that correspond to FARS files for that/those year/s  
+
+## **Examples**
+```{r dplyr, echo=FALSE, message=FALSE}
+library(dplyr)
+library(readr)
+library(FarsPackageCoursera)
+library(tidyr)
+library(maps)
+library(graphics)
+
+```
+
+To make the **filename**:
+```{r make_filename, echo=TRUE}
+make_filename(2013)
+```
+
+To **read** in the FARS file from the working directory:
+```{r fars_read_1, eval=FALSE}
+fars_read("accident_2013.csv.bz2")
+```
+or:
+```{r fars_read_2, eval=FALSE}
+fars_read(make_filename(2013))
+```
+
+**Reads** accident file and **returns** tibble with month and year:
+```{r fars_read_years, eval=TRUE}
+fars_read_years(2013)
+```
+
+**Returns** the number of accidents per month of select years:
+```{r fars_summarize_years}
+fars_summarize_years(2013)
+```
+
+**Graphs** accident locations on US state maps
+```{r fars_map_state, fig.show='hold'}
+fars_map_state(23, 2013)
+fars_map_state(29, 2013)
+```
+
+## Notes
+
+This package requires the FARS files to be in the format created by *make_filename*. If these files are not in this required format all other functions in this package will result in an error.  
